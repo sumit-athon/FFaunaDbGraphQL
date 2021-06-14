@@ -31,13 +31,13 @@
 		DC244FEC26665EAD00DC4878 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC244FEF26665EAD00DC4878 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC244FF126665EAD00DC4878 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC2632C7266A7643008590EF /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		DC2632CA266A7A09008590EF /* FetchAllOrders.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAllOrders.graphql; sourceTree = "<group>"; };
 		DC2632CD266A85F2008590EF /* FetchOrder.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchOrder.graphql; sourceTree = "<group>"; };
 		DC2632D0266A8760008590EF /* FetchOrder.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchOrder.graphql.swift; sourceTree = "<group>"; };
 		DC2632D1266A8760008590EF /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		DC2632D2266A8760008590EF /* FetchAllOrders.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAllOrders.graphql.swift; sourceTree = "<group>"; };
 		DC2632D7266A8A22008590EF /* FaunaDBQLManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaunaDBQLManager.swift; sourceTree = "<group>"; };
+		DCFF3EF926777B9600B7F9C5 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		E864917B0A31F35C9594006B /* Pods_FaunaDbGraphQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FaunaDbGraphQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -107,10 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				DC2632D7266A8A22008590EF /* FaunaDBQLManager.swift */,
+				DCFF3EF926777B9600B7F9C5 /* schema.json */,
 				DC2632CF266A8760008590EF /* API */,
 				DC2632CA266A7A09008590EF /* FetchAllOrders.graphql */,
 				DC2632CD266A85F2008590EF /* FetchOrder.graphql */,
-				DC2632C7266A7643008590EF /* schema.json */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -250,7 +250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}/GraphQL\"\n\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}/GraphQL\"\n\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API\n\n# \"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=https://graphql.fauna.com/graphql --header=\"authorization: Basic Zm5BRUxySVhCMUFDQWhOUzdxMTJEc1NfUjNBUy1lcTdSM25CRVVqdjpncWwtZGVtbzphZG1pbg==\"\n";
 		};
 		E21455135094ECCA9D6D902C /* Assets Catalog Builder */ = {
 			isa = PBXShellScriptBuildPhase;
