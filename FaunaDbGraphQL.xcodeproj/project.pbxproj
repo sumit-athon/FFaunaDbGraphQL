@@ -17,6 +17,7 @@
 		DC2632D4266A8760008590EF /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2632D1266A8760008590EF /* Types.graphql.swift */; };
 		DC2632D5266A8760008590EF /* FetchAllOrders.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2632D2266A8760008590EF /* FetchAllOrders.graphql.swift */; };
 		DC2632D8266A8A22008590EF /* FaunaDBQLManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2632D7266A8A22008590EF /* FaunaDBQLManager.swift */; };
+		DCFF3F0B2677954600B7F9C5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC244FF126665EAD00DC4878 /* Info.plist */; };
 		E54A5AE1A3A0165C78E03677 /* Pods_FaunaDbGraphQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E864917B0A31F35C9594006B /* Pods_FaunaDbGraphQL.framework */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCFF3F0B2677954600B7F9C5 /* Info.plist in Resources */,
 				DC244FF026665EAD00DC4878 /* LaunchScreen.storyboard in Resources */,
 				DC244FED26665EAD00DC4878 /* Assets.xcassets in Resources */,
 				DC244FEB26665EAA00DC4878 /* Main.storyboard in Resources */,
