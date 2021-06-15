@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'FaunaDbGraphQL'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Apollo client setup with Fauna DB Graph QL'
  
   s.description      = <<-DESC
