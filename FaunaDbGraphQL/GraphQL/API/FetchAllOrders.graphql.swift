@@ -18,6 +18,8 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
           __typename
           cl_name
           cl_image_url
+          cl_sku
+          cl_quantity
         }
         cl_attributes {
           __typename
@@ -235,6 +237,8 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("cl_name", type: .scalar(String.self)),
             GraphQLField("cl_image_url", type: .scalar(String.self)),
+            GraphQLField("cl_sku", type: .scalar(String.self)),
+            GraphQLField("cl_quantity", type: .scalar(String.self)),
           ]
         }
 
@@ -244,8 +248,8 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(clName: String? = nil, clImageUrl: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "OrderItem", "cl_name": clName, "cl_image_url": clImageUrl])
+        public init(clName: String? = nil, clImageUrl: String? = nil, clSku: String? = nil, clQuantity: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "OrderItem", "cl_name": clName, "cl_image_url": clImageUrl, "cl_sku": clSku, "cl_quantity": clQuantity])
         }
 
         public var __typename: String {
@@ -272,6 +276,24 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "cl_image_url")
+          }
+        }
+
+        public var clSku: String? {
+          get {
+            return resultMap["cl_sku"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_sku")
+          }
+        }
+
+        public var clQuantity: String? {
+          get {
+            return resultMap["cl_quantity"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_quantity")
           }
         }
       }

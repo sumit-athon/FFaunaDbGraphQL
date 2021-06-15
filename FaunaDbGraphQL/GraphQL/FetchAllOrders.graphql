@@ -4,9 +4,11 @@ query fetchAllOrderByEmail($email: String!) {
     cl_created_at,
     cl_order_image_url,
     cl_order_items {
-        cl_name,
-        cl_image_url
-    }
+      cl_name,
+      cl_image_url
+      cl_sku,
+      cl_quantity
+    },
     cl_attributes {
       cl_customer_email,
       cl_number,
