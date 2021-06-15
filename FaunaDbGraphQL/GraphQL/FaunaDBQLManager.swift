@@ -57,7 +57,7 @@ class TokenAddingInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
         if let key = authKey {
-            request.addHeader(name: "Authorization", value: "Basic \(key)")
+            request.addHeader(name: "Authorization", value: "Bearer \(key)")
         }
         chain.proceedAsync(request: request, response: response, completion: completion)
     }
