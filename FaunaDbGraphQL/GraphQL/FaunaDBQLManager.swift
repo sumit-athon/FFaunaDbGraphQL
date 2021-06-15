@@ -32,7 +32,7 @@ open class FaunaDBQLManager {
 
     // Fetch Events filtered by slug
     
-    func fetchAllOrdersByEmail(email: String, success: @escaping([FetchAllOrderByEmailQuery.Data.FindAllOrderByEmail?]?) -> Void, failure: @escaping(Error) -> Void) {
+    open func fetchAllOrdersByEmail(email: String, success: @escaping([FetchAllOrderByEmailQuery.Data.FindAllOrderByEmail?]?) -> Void, failure: @escaping(Error) -> Void) {
         self.apollo.fetch(query: FetchAllOrderByEmailQuery(email: email)) { (result) in
             switch result {
             case .success(let graphResult):
