@@ -13,6 +13,12 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
         __typename
         cl_order_id
         cl_created_at
+        cl_order_image_url
+        cl_order_items {
+          __typename
+          cl_name
+          cl_image_url
+        }
         cl_attributes {
           __typename
           cl_customer_email
@@ -121,6 +127,8 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("cl_order_id", type: .scalar(String.self)),
           GraphQLField("cl_created_at", type: .scalar(String.self)),
+          GraphQLField("cl_order_image_url", type: .scalar(String.self)),
+          GraphQLField("cl_order_items", type: .list(.object(ClOrderItem.selections))),
           GraphQLField("cl_attributes", type: .object(ClAttribute.selections)),
           GraphQLField("cl_payment", type: .object(ClPayment.selections)),
           GraphQLField("cl_shipping", type: .object(ClShipping.selections)),
@@ -134,8 +142,8 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(clOrderId: String? = nil, clCreatedAt: String? = nil, clAttributes: ClAttribute? = nil, clPayment: ClPayment? = nil, clShipping: ClShipping? = nil, clBilling: ClBilling? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Order", "cl_order_id": clOrderId, "cl_created_at": clCreatedAt, "cl_attributes": clAttributes.flatMap { (value: ClAttribute) -> ResultMap in value.resultMap }, "cl_payment": clPayment.flatMap { (value: ClPayment) -> ResultMap in value.resultMap }, "cl_shipping": clShipping.flatMap { (value: ClShipping) -> ResultMap in value.resultMap }, "cl_billing": clBilling.flatMap { (value: ClBilling) -> ResultMap in value.resultMap }])
+      public init(clOrderId: String? = nil, clCreatedAt: String? = nil, clOrderImageUrl: String? = nil, clOrderItems: [ClOrderItem?]? = nil, clAttributes: ClAttribute? = nil, clPayment: ClPayment? = nil, clShipping: ClShipping? = nil, clBilling: ClBilling? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Order", "cl_order_id": clOrderId, "cl_created_at": clCreatedAt, "cl_order_image_url": clOrderImageUrl, "cl_order_items": clOrderItems.flatMap { (value: [ClOrderItem?]) -> [ResultMap?] in value.map { (value: ClOrderItem?) -> ResultMap? in value.flatMap { (value: ClOrderItem) -> ResultMap in value.resultMap } } }, "cl_attributes": clAttributes.flatMap { (value: ClAttribute) -> ResultMap in value.resultMap }, "cl_payment": clPayment.flatMap { (value: ClPayment) -> ResultMap in value.resultMap }, "cl_shipping": clShipping.flatMap { (value: ClShipping) -> ResultMap in value.resultMap }, "cl_billing": clBilling.flatMap { (value: ClBilling) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -162,6 +170,24 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "cl_created_at")
+        }
+      }
+
+      public var clOrderImageUrl: String? {
+        get {
+          return resultMap["cl_order_image_url"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "cl_order_image_url")
+        }
+      }
+
+      public var clOrderItems: [ClOrderItem?]? {
+        get {
+          return (resultMap["cl_order_items"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [ClOrderItem?] in value.map { (value: ResultMap?) -> ClOrderItem? in value.flatMap { (value: ResultMap) -> ClOrderItem in ClOrderItem(unsafeResultMap: value) } } }
+        }
+        set {
+          resultMap.updateValue(newValue.flatMap { (value: [ClOrderItem?]) -> [ResultMap?] in value.map { (value: ClOrderItem?) -> ResultMap? in value.flatMap { (value: ClOrderItem) -> ResultMap in value.resultMap } } }, forKey: "cl_order_items")
         }
       }
 
@@ -198,6 +224,55 @@ public final class FetchAllOrderByEmailQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue?.resultMap, forKey: "cl_billing")
+        }
+      }
+
+      public struct ClOrderItem: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["OrderItem"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("cl_name", type: .scalar(String.self)),
+            GraphQLField("cl_image_url", type: .scalar(String.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(clName: String? = nil, clImageUrl: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "OrderItem", "cl_name": clName, "cl_image_url": clImageUrl])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var clName: String? {
+          get {
+            return resultMap["cl_name"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_name")
+          }
+        }
+
+        public var clImageUrl: String? {
+          get {
+            return resultMap["cl_image_url"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_image_url")
+          }
         }
       }
 

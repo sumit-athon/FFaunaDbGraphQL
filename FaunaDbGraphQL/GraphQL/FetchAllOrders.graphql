@@ -2,6 +2,11 @@ query fetchAllOrderByEmail($email: String!) {
   findAllOrderByEmail(email:$email){
     cl_order_id
     cl_created_at,
+    cl_order_image_url,
+    cl_order_items {
+        cl_name,
+        cl_image_url
+    }
     cl_attributes {
       cl_customer_email,
       cl_number,
