@@ -1,0 +1,33 @@
+query fetchUserByFaunaID($id: ID!) {
+  findUserByID(id:$id){
+    _id,
+    auth0_id,
+    auth0_name,
+    auth0_email
+    auth0_nickname,
+    auth0_picture,
+    auth0_user_id,
+    auth0_identities0_user_id,
+    auth0_identities0_issocial,
+    auth0_identities0_provider,
+    username,
+    cl_payment {
+      cl_type,
+      cl_payment_method_details {
+        cl_brand,
+        cl_last4,
+        cl_exp_year,
+        cl_exp_month,
+        cl_funding
+      }
+    },
+    cl_shipping {
+      cl_line_1,
+      cl_line_2,
+      cl_city,
+      cl_state_code,
+      cl_zip_code,
+      cl_country_code,
+    }
+  }
+}

@@ -7,64 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "C53AF23A-0057-4887-928A-93BB8F5DF727"
+            uuid = "EE36EFDF-FDAF-4C8F-BBB6-C80B14D3169A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FaunaDbGraphQL/GraphQL/FaunaDBQLManager.swift"
+            filePath = "FaunaDbGraphQL/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "fetchAllOrdersByEmail(email:success:failure:)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C53AF23A-0057-4887-928A-93BB8F5DF727 - 2229957cdce4593f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Apollo.GraphQLResult&lt;FaunaDbGraphQL.FetchAllOrderByEmailQuery.Data&gt;, Swift.Error&gt;) -&gt; () in FaunaDbGraphQL.FaunaDBQLManager.fetchAllOrdersByEmail(email: Swift.String, success: (Swift.Optional&lt;Swift.Array&lt;Swift.Optional&lt;FaunaDbGraphQL.FetchAllOrderByEmailQuery.Data.FindAllOrderByEmail&gt;&gt;&gt;) -&gt; (), failure: (Swift.Error) -&gt; ()) -&gt; ()"
-                  moduleName = "FaunaDbGraphQL"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/surjeet/Projects/DevRonins/James/FaunaDB/FaunaDbGraphQL/FaunaDbGraphQL/GraphQL/FaunaDBQLManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "270">
-               </Location>
-               <Location
-                  uuid = "C53AF23A-0057-4887-928A-93BB8F5DF727 - 2229957cdce4593f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Apollo.GraphQLResult&lt;FaunaDbGraphQL.FetchAllOrderByEmailQuery.Data&gt;, Swift.Error&gt;) -&gt; () in FaunaDbGraphQL.FaunaDBQLManager.fetchAllOrdersByEmail(email: Swift.String, success: (Swift.Optional&lt;Swift.Array&lt;Swift.Optional&lt;FaunaDbGraphQL.FetchAllOrderByEmailQuery.Data.FindAllOrderByEmail&gt;&gt;&gt;) -&gt; (), failure: (Swift.Error) -&gt; ()) -&gt; ()"
-                  moduleName = "FaunaDbGraphQL"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/surjeet/Projects/DevRonins/James/FaunaDB/FaunaDbGraphQL/FaunaDbGraphQL/GraphQL/FaunaDBQLManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "292">
-               </Location>
-               <Location
-                  uuid = "C53AF23A-0057-4887-928A-93BB8F5DF727 - 2229957cdce4593f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Apollo.GraphQLResult&lt;FaunaDbGraphQL.FetchAllOrderByEmailQuery.Data&gt;, Swift.Error&gt;) -&gt; () in FaunaDbGraphQL.FaunaDBQLManager.fetchAllOrdersByEmail(email: Swift.String, success: (Swift.Optional&lt;Swift.Array&lt;Swift.Optional&lt;FaunaDbGraphQL.FetchAllOrderByEmailQuery.Data.FindAllOrderByEmail&gt;&gt;&gt;) -&gt; (), failure: (Swift.Error) -&gt; ()) -&gt; ()"
-                  moduleName = "FaunaDbGraphQL"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/surjeet/Projects/DevRonins/James/FaunaDB/FaunaDbGraphQL/FaunaDbGraphQL/GraphQL/FaunaDBQLManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "567">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

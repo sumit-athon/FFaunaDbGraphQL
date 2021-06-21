@@ -1,0 +1,7 @@
+# Write your query or mutation here
+mutation updateUser($id: ID!, $data: UserInput!) {
+  updateUser(id: $id, data: $data) {
+    _id
+    auth0_nickname
+  }
+}

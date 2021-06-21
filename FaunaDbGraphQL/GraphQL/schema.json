@@ -1796,16 +1796,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "username",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "auth0_client_id",
             "description": null,
             "type": {
@@ -1956,16 +1946,6 @@
             "defaultValue": null
           },
           {
-            "name": "auth0_user_type",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "UserType",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "cl_billing",
             "description": null,
             "type": {
@@ -1991,6 +1971,26 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "PaymentSourceDetailInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user_type",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "UserType",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "username",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -3869,33 +3869,6 @@
         "description": null,
         "fields": [
           {
-            "name": "findUserByAuth0",
-            "description": null,
-            "args": [
-              {
-                "name": "auth0_id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "findGatedStreamByStreamId",
             "description": null,
             "args": [
@@ -3950,37 +3923,6 @@
             "deprecationReason": null
           },
           {
-            "name": "findAllOrderByEmail",
-            "description": null,
-            "args": [
-              {
-                "name": "email",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null
-              }
-            ],
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Order",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "findOrderByID",
             "description": "Find a document from the collection of 'Order' by its id.",
             "args": [
@@ -4030,6 +3972,37 @@
               "kind": "OBJECT",
               "name": "GatedStream",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "findAllOrderByUserId",
+            "description": null,
+            "args": [
+              {
+                "name": "userId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Order",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4362,18 +4335,6 @@
             "deprecationReason": null
           },
           {
-            "name": "auth0_user_type",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "ENUM",
-              "name": "UserType",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "auth0_email_verified",
             "description": null,
             "args": [],
@@ -4480,6 +4441,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "PaymentSourceDetail",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user_type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "UserType",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4666,12 +4639,6 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
-          {
-            "name": "CUSTOMER",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "CREATOR",
             "description": null,

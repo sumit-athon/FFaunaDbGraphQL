@@ -32,11 +32,12 @@ open class FaunaDBQLManager {
 
     // Fetch Events filtered by slug
     
-    open func fetchAllOrdersByEmail(email: String, success: @escaping([FetchAllOrderByEmailQuery.Data.FindAllOrderByEmail?]?) -> Void, failure: @escaping(Error) -> Void) {
-        self.apollo.fetch(query: FetchAllOrderByEmailQuery(email: email)) { (result) in
+    open func fetchAllOrdersByUserId(userId: String, success: @escaping([FindAllOrderQuery.Data.FindAllOrderByUserId?]?) -> Void, failure: @escaping(Error) -> Void) {
+
+        self.apollo.fetch(query: FindAllOrderQuery(userId: userId), cachePolicy: .fetchIgnoringCacheData) { (result) in
             switch result {
             case .success(let graphResult):
-                let orders = graphResult.data?.findAllOrderByEmail
+                let orders = graphResult.data?.findAllOrderByUserId
                 success(orders)
             case .failure(let error):
                 failure(error)
@@ -44,39 +45,23 @@ open class FaunaDBQLManager {
             }
         }
     }
-}
-
-class TokenAddingInterceptor: ApolloInterceptor {
-    
-    var authKey: String?
-    init(key: String?) { self.authKey = key  }
-    
-    func interceptAsync<Operation: GraphQLOperation>(
-        chain: RequestChain,
-        request: HTTPRequest<Operation>,
-        response: HTTPResponse<Operation>?,
-        completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
-        if let key = authKey {
-            request.addHeader(name: "Authorization", value: "Bearer \(key)")
+        
+    func fetchUser(id: String, success: @escaping(FetchUserByFaunaIdQuery.Data.FindUserById?) -> Void, failure: @escaping(Error) -> Void) {
+        self.apollo.fetch(query: FetchUserByFaunaIdQuery(id: id), cachePolicy: .fetchIgnoringCacheData) { (result) in
+            switch result {
+            case .success(let graphResult):
+                let user = graphResult.data?.findUserById
+                success(user)
+            case .failure(let error):
+                failure(error)
+                print(error.localizedDescription)
+            }
         }
-        chain.proceedAsync(request: request, response: response, completion: completion)
     }
+    
+    func updateUser(id: String, data: [String: Any]) {
+//        self.apollo.perform(mutation: UpdateUserMutation(id: id, data: data))
+    }
+    
 }
 
-class NetworkInterceptorProvider: LegacyInterceptorProvider {
-    
-    var authKey: String?
-    
-    init(client: URLSessionClient = URLSessionClient(),
-                shouldInvalidateClientOnDeinit: Bool = true,
-                store: ApolloStore, authKey: String?) {
-        super.init(client: client, store: store)
-        self.authKey = authKey
-    }
-    
-    override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
-        var interceptors = super.interceptors(for: operation)
-        interceptors.insert(TokenAddingInterceptor(key: authKey), at: 0)
-        return interceptors
-    }
-}

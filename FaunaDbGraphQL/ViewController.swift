@@ -20,12 +20,12 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        FaunaDBQLManager.shared.fetchAllOrdersByEmail(email: "sumit@athon.io") { (orders) in
+        FaunaDBQLManager.shared.fetchAllOrdersByUserId(userId: "") { (orders) in
             print("Orders Count: \(orders?.count)")
+            let images = orders?.map({$0?.clOrderImageUrl})
+            print(images)
         } failure: { (error) in
             print("Error kmkm")
         }
     }
 }
-
