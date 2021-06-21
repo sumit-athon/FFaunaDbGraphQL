@@ -59,7 +59,24 @@ open class FaunaDBQLManager {
         }
     }
     
-    func updateUser(id: String, data: [String: Any]) {
+    func updateUser(id: String, username: String?, success: @escaping(UpdateUserMutation.Data.UpdateUser?) -> Void, failure: @escaping(Error) -> Void) {
+        
+        var userInput = UserInput()
+        if let _uname = username {
+            userInput.username = _uname
+        }
+
+        self.apollo.perform(mutation: UpdateUserMutation(id: id, data: userInput), publishResultToStore: true) { (result) in
+            switch result {
+            case .success(let graphResult):
+                let user = graphResult.data?.updateUser
+                success(user)
+            case .failure(let error):
+                failure(error)
+                print(error.localizedDescription)
+            }
+        }
+        
 //        self.apollo.perform(mutation: UpdateUserMutation(id: id, data: data))
     }
     

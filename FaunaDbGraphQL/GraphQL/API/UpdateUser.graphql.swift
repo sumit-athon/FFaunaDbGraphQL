@@ -12,7 +12,6 @@ public final class UpdateUserMutation: GraphQLMutation {
       updateUser(id: $id, data: $data) {
         __typename
         _id
-        auth0_nickname
       }
     }
     """
@@ -67,7 +66,6 @@ public final class UpdateUserMutation: GraphQLMutation {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("_id", type: .nonNull(.scalar(GraphQLID.self))),
-          GraphQLField("auth0_nickname", type: .scalar(String.self)),
         ]
       }
 
@@ -77,8 +75,8 @@ public final class UpdateUserMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(_id: GraphQLID, auth0Nickname: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "User", "_id": _id, "auth0_nickname": auth0Nickname])
+      public init(_id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "User", "_id": _id])
       }
 
       public var __typename: String {
@@ -97,15 +95,6 @@ public final class UpdateUserMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "_id")
-        }
-      }
-
-      public var auth0Nickname: String? {
-        get {
-          return resultMap["auth0_nickname"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "auth0_nickname")
         }
       }
     }
