@@ -100,3 +100,97 @@ public final class UpdateUserMutation: GraphQLMutation {
     }
   }
 }
+
+public final class CheckUsernameExistQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query checkUsernameExist($username: String!) {
+      findUserByUsername(username: $username) {
+        __typename
+        _id
+      }
+    }
+    """
+
+  public let operationName: String = "checkUsernameExist"
+
+  public var username: String
+
+  public init(username: String) {
+    self.username = username
+  }
+
+  public var variables: GraphQLMap? {
+    return ["username": username]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["Query"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("findUserByUsername", arguments: ["username": GraphQLVariable("username")], type: .object(FindUserByUsername.selections)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(findUserByUsername: FindUserByUsername? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "findUserByUsername": findUserByUsername.flatMap { (value: FindUserByUsername) -> ResultMap in value.resultMap }])
+    }
+
+    public var findUserByUsername: FindUserByUsername? {
+      get {
+        return (resultMap["findUserByUsername"] as? ResultMap).flatMap { FindUserByUsername(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "findUserByUsername")
+      }
+    }
+
+    public struct FindUserByUsername: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["User"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("_id", type: .nonNull(.scalar(GraphQLID.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(_id: GraphQLID) {
+        self.init(unsafeResultMap: ["__typename": "User", "_id": _id])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      /// The document's ID.
+      public var _id: GraphQLID {
+        get {
+          return resultMap["_id"]! as! GraphQLID
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "_id")
+        }
+      }
+    }
+  }
+}

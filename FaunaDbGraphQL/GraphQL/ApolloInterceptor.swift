@@ -13,11 +13,10 @@ class TokenAddingInterceptor: ApolloInterceptor {
     var authKey: String?
     init(key: String?) { self.authKey = key  }
     
-    func interceptAsync<Operation: GraphQLOperation>(
-        chain: RequestChain,
-        request: HTTPRequest<Operation>,
-        response: HTTPResponse<Operation>?,
-        completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
+    func interceptAsync<Operation: GraphQLOperation>(chain: RequestChain,
+                                                     request: HTTPRequest<Operation>,
+                                                     response: HTTPResponse<Operation>?,
+                                                     completion: @escaping (Result<GraphQLResult<Operation.Data>, Error>) -> Void) {
         if let key = authKey {
             request.addHeader(name: "Authorization", value: "Bearer \(key)")
         }

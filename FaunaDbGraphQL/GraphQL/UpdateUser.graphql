@@ -4,3 +4,10 @@ mutation updateUser($id: ID!, $data: UserInput!) {
     _id
   }
 }
+
+
+query checkUsernameExist($username: String!) {
+  findUserByUsername(username: $username) {
+    _id,
+  }
+}

@@ -18,8 +18,8 @@ open class FaunaDBQLManager {
     private(set) lazy var apollo: ApolloClient = {
         
         let url = URL(string: graphQLendPoint)
-        if url == nil {
-            fatalError("Missing Server end point! Provide 'graphQLendPoint' value ")
+        if url == nil { 
+            fatalError("Missing Server end point! Provide 'graphQLendPoint' value \n 'graphQLAuthKey' If Authorization required")
         }
         let client = URLSessionClient()
         let cache = InMemoryNormalizedCache()
@@ -46,7 +46,7 @@ open class FaunaDBQLManager {
         }
     }
         
-    func fetchUser(id: String, success: @escaping(FetchUserByFaunaIdQuery.Data.FindUserById?) -> Void, failure: @escaping(Error) -> Void) {
+    open func fetchUser(id: String, success: @escaping(FetchUserByFaunaIdQuery.Data.FindUserById?) -> Void, failure: @escaping(Error) -> Void) {
         self.apollo.fetch(query: FetchUserByFaunaIdQuery(id: id), cachePolicy: .fetchIgnoringCacheData) { (result) in
             switch result {
             case .success(let graphResult):
@@ -58,14 +58,30 @@ open class FaunaDBQLManager {
             }
         }
     }
+}
+
+// Update username functions
+extension FaunaDBQLManager {
     
-    func updateUser(id: String, username: String?, success: @escaping(UpdateUserMutation.Data.UpdateUser?) -> Void, failure: @escaping(Error) -> Void) {
+    open func checkUsernameAlreadyExist(username: String, success: @escaping(Bool) -> Void, failure: @escaping(Error) -> Void) {
+        self.apollo.fetch(query: CheckUsernameExistQuery(username: username)) {(result) in
+            switch result {
+            case .success(let graphResult):
+                if let _ = graphResult.data?.findUserByUsername {
+                    success(true)
+                } else {
+                    success(false)
+                }
+            case .failure(let error):
+                failure(error)
+            }
+        }
+    }
+    
+    open func updateUser(id: String, username: String, success: @escaping(UpdateUserMutation.Data.UpdateUser?) -> Void, failure: @escaping(Error) -> Void) {
         
         var userInput = UserInput()
-        if let _uname = username {
-            userInput.username = _uname
-        }
-
+        userInput.username = username
         self.apollo.perform(mutation: UpdateUserMutation(id: id, data: userInput), publishResultToStore: true) { (result) in
             switch result {
             case .success(let graphResult):
@@ -76,9 +92,6 @@ open class FaunaDBQLManager {
                 print(error.localizedDescription)
             }
         }
-        
-//        self.apollo.perform(mutation: UpdateUserMutation(id: id, data: data))
     }
-    
 }
 

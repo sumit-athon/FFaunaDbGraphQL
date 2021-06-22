@@ -19,7 +19,15 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkUsernameExist()
+    }
     
+    private func checkUsernameExist() {
+        FaunaDBQLManager.shared.checkUsernameAlreadyExist(username: "sumitte") { (isExist) in
+            print("User Exist: \(isExist)")
+        } failure: { (error) in
+            print(error.localizedDescription)
+        }
     }
     
     private func updateUser() {
