@@ -7,20 +7,24 @@ query findAllOrder($userId: String!) {
       cl_name,
       cl_image_url
       cl_sku,
-      cl_quantity
+      cl_quantity,
+      cl_formatted_total_amount
     },
     cl_attributes {
       cl_customer_email,
       cl_number,
       cl_status,
       cl_skus_count,
-      cl_formatted_shipping_amount,
-      cl_formatted_shipping_taxable_amount,
-      cl_total_tax_amount_float,
-      cl_formatted_total_taxable_amount,
-      cl_total_amount_float,
       cl_currency_code,
       cl_payment_status,
+      cl_formatted_shipping_taxable_amount,
+      cl_formatted_total_taxable_amount,
+      cl_formatted_subtotal_amount,
+      cl_formatted_shipping_amount,
+      cl_formatted_subtotal_tax_amount,
+      cl_formatted_shipping_tax_amount,
+      cl_formatted_total_amount_with_taxes,
+      cl_formatted_total_amount,
     },
     cl_payment {
       cl_type,

@@ -20,6 +20,7 @@ public final class FindAllOrderQuery: GraphQLQuery {
           cl_image_url
           cl_sku
           cl_quantity
+          cl_formatted_total_amount
         }
         cl_attributes {
           __typename
@@ -27,13 +28,16 @@ public final class FindAllOrderQuery: GraphQLQuery {
           cl_number
           cl_status
           cl_skus_count
-          cl_formatted_shipping_amount
-          cl_formatted_shipping_taxable_amount
-          cl_total_tax_amount_float
-          cl_formatted_total_taxable_amount
-          cl_total_amount_float
           cl_currency_code
           cl_payment_status
+          cl_formatted_shipping_taxable_amount
+          cl_formatted_total_taxable_amount
+          cl_formatted_subtotal_amount
+          cl_formatted_shipping_amount
+          cl_formatted_subtotal_tax_amount
+          cl_formatted_shipping_tax_amount
+          cl_formatted_total_amount_with_taxes
+          cl_formatted_total_amount
         }
         cl_payment {
           __typename
@@ -239,6 +243,7 @@ public final class FindAllOrderQuery: GraphQLQuery {
             GraphQLField("cl_image_url", type: .scalar(String.self)),
             GraphQLField("cl_sku", type: .scalar(String.self)),
             GraphQLField("cl_quantity", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_total_amount", type: .scalar(String.self)),
           ]
         }
 
@@ -248,8 +253,8 @@ public final class FindAllOrderQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(clName: String? = nil, clImageUrl: String? = nil, clSku: String? = nil, clQuantity: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "OrderItem", "cl_name": clName, "cl_image_url": clImageUrl, "cl_sku": clSku, "cl_quantity": clQuantity])
+        public init(clName: String? = nil, clImageUrl: String? = nil, clSku: String? = nil, clQuantity: String? = nil, clFormattedTotalAmount: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "OrderItem", "cl_name": clName, "cl_image_url": clImageUrl, "cl_sku": clSku, "cl_quantity": clQuantity, "cl_formatted_total_amount": clFormattedTotalAmount])
         }
 
         public var __typename: String {
@@ -296,6 +301,15 @@ public final class FindAllOrderQuery: GraphQLQuery {
             resultMap.updateValue(newValue, forKey: "cl_quantity")
           }
         }
+
+        public var clFormattedTotalAmount: String? {
+          get {
+            return resultMap["cl_formatted_total_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_total_amount")
+          }
+        }
       }
 
       public struct ClAttribute: GraphQLSelectionSet {
@@ -308,13 +322,16 @@ public final class FindAllOrderQuery: GraphQLQuery {
             GraphQLField("cl_number", type: .scalar(String.self)),
             GraphQLField("cl_status", type: .scalar(String.self)),
             GraphQLField("cl_skus_count", type: .scalar(String.self)),
-            GraphQLField("cl_formatted_shipping_amount", type: .scalar(String.self)),
-            GraphQLField("cl_formatted_shipping_taxable_amount", type: .scalar(String.self)),
-            GraphQLField("cl_total_tax_amount_float", type: .scalar(String.self)),
-            GraphQLField("cl_formatted_total_taxable_amount", type: .scalar(String.self)),
-            GraphQLField("cl_total_amount_float", type: .scalar(String.self)),
             GraphQLField("cl_currency_code", type: .scalar(String.self)),
             GraphQLField("cl_payment_status", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_shipping_taxable_amount", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_total_taxable_amount", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_subtotal_amount", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_shipping_amount", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_subtotal_tax_amount", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_shipping_tax_amount", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_total_amount_with_taxes", type: .scalar(String.self)),
+            GraphQLField("cl_formatted_total_amount", type: .scalar(String.self)),
           ]
         }
 
@@ -324,8 +341,8 @@ public final class FindAllOrderQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(clCustomerEmail: String? = nil, clNumber: String? = nil, clStatus: String? = nil, clSkusCount: String? = nil, clFormattedShippingAmount: String? = nil, clFormattedShippingTaxableAmount: String? = nil, clTotalTaxAmountFloat: String? = nil, clFormattedTotalTaxableAmount: String? = nil, clTotalAmountFloat: String? = nil, clCurrencyCode: String? = nil, clPaymentStatus: String? = nil) {
-          self.init(unsafeResultMap: ["__typename": "OrderAttribute", "cl_customer_email": clCustomerEmail, "cl_number": clNumber, "cl_status": clStatus, "cl_skus_count": clSkusCount, "cl_formatted_shipping_amount": clFormattedShippingAmount, "cl_formatted_shipping_taxable_amount": clFormattedShippingTaxableAmount, "cl_total_tax_amount_float": clTotalTaxAmountFloat, "cl_formatted_total_taxable_amount": clFormattedTotalTaxableAmount, "cl_total_amount_float": clTotalAmountFloat, "cl_currency_code": clCurrencyCode, "cl_payment_status": clPaymentStatus])
+        public init(clCustomerEmail: String? = nil, clNumber: String? = nil, clStatus: String? = nil, clSkusCount: String? = nil, clCurrencyCode: String? = nil, clPaymentStatus: String? = nil, clFormattedShippingTaxableAmount: String? = nil, clFormattedTotalTaxableAmount: String? = nil, clFormattedSubtotalAmount: String? = nil, clFormattedShippingAmount: String? = nil, clFormattedSubtotalTaxAmount: String? = nil, clFormattedShippingTaxAmount: String? = nil, clFormattedTotalAmountWithTaxes: String? = nil, clFormattedTotalAmount: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "OrderAttribute", "cl_customer_email": clCustomerEmail, "cl_number": clNumber, "cl_status": clStatus, "cl_skus_count": clSkusCount, "cl_currency_code": clCurrencyCode, "cl_payment_status": clPaymentStatus, "cl_formatted_shipping_taxable_amount": clFormattedShippingTaxableAmount, "cl_formatted_total_taxable_amount": clFormattedTotalTaxableAmount, "cl_formatted_subtotal_amount": clFormattedSubtotalAmount, "cl_formatted_shipping_amount": clFormattedShippingAmount, "cl_formatted_subtotal_tax_amount": clFormattedSubtotalTaxAmount, "cl_formatted_shipping_tax_amount": clFormattedShippingTaxAmount, "cl_formatted_total_amount_with_taxes": clFormattedTotalAmountWithTaxes, "cl_formatted_total_amount": clFormattedTotalAmount])
         }
 
         public var __typename: String {
@@ -373,51 +390,6 @@ public final class FindAllOrderQuery: GraphQLQuery {
           }
         }
 
-        public var clFormattedShippingAmount: String? {
-          get {
-            return resultMap["cl_formatted_shipping_amount"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "cl_formatted_shipping_amount")
-          }
-        }
-
-        public var clFormattedShippingTaxableAmount: String? {
-          get {
-            return resultMap["cl_formatted_shipping_taxable_amount"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "cl_formatted_shipping_taxable_amount")
-          }
-        }
-
-        public var clTotalTaxAmountFloat: String? {
-          get {
-            return resultMap["cl_total_tax_amount_float"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "cl_total_tax_amount_float")
-          }
-        }
-
-        public var clFormattedTotalTaxableAmount: String? {
-          get {
-            return resultMap["cl_formatted_total_taxable_amount"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "cl_formatted_total_taxable_amount")
-          }
-        }
-
-        public var clTotalAmountFloat: String? {
-          get {
-            return resultMap["cl_total_amount_float"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "cl_total_amount_float")
-          }
-        }
-
         public var clCurrencyCode: String? {
           get {
             return resultMap["cl_currency_code"] as? String
@@ -433,6 +405,78 @@ public final class FindAllOrderQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "cl_payment_status")
+          }
+        }
+
+        public var clFormattedShippingTaxableAmount: String? {
+          get {
+            return resultMap["cl_formatted_shipping_taxable_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_shipping_taxable_amount")
+          }
+        }
+
+        public var clFormattedTotalTaxableAmount: String? {
+          get {
+            return resultMap["cl_formatted_total_taxable_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_total_taxable_amount")
+          }
+        }
+
+        public var clFormattedSubtotalAmount: String? {
+          get {
+            return resultMap["cl_formatted_subtotal_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_subtotal_amount")
+          }
+        }
+
+        public var clFormattedShippingAmount: String? {
+          get {
+            return resultMap["cl_formatted_shipping_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_shipping_amount")
+          }
+        }
+
+        public var clFormattedSubtotalTaxAmount: String? {
+          get {
+            return resultMap["cl_formatted_subtotal_tax_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_subtotal_tax_amount")
+          }
+        }
+
+        public var clFormattedShippingTaxAmount: String? {
+          get {
+            return resultMap["cl_formatted_shipping_tax_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_shipping_tax_amount")
+          }
+        }
+
+        public var clFormattedTotalAmountWithTaxes: String? {
+          get {
+            return resultMap["cl_formatted_total_amount_with_taxes"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_total_amount_with_taxes")
+          }
+        }
+
+        public var clFormattedTotalAmount: String? {
+          get {
+            return resultMap["cl_formatted_total_amount"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "cl_formatted_total_amount")
           }
         }
       }
