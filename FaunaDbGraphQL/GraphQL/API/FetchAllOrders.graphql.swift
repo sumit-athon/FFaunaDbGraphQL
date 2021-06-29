@@ -9,7 +9,7 @@ public final class FindAllOrderQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query findAllOrder($userId: String!) {
-      findAllOrderByUserId(userId: $userId) {
+      findOrdersByUserId(userId: $userId) {
         __typename
         cl_order_id
         cl_created_at
@@ -102,7 +102,7 @@ public final class FindAllOrderQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("findAllOrderByUserId", arguments: ["userId": GraphQLVariable("userId")], type: .list(.object(FindAllOrderByUserId.selections))),
+        GraphQLField("findOrdersByUserId", arguments: ["userId": GraphQLVariable("userId")], type: .list(.object(FindOrdersByUserId.selections))),
       ]
     }
 
@@ -112,20 +112,20 @@ public final class FindAllOrderQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(findAllOrderByUserId: [FindAllOrderByUserId?]? = nil) {
-      self.init(unsafeResultMap: ["__typename": "Query", "findAllOrderByUserId": findAllOrderByUserId.flatMap { (value: [FindAllOrderByUserId?]) -> [ResultMap?] in value.map { (value: FindAllOrderByUserId?) -> ResultMap? in value.flatMap { (value: FindAllOrderByUserId) -> ResultMap in value.resultMap } } }])
+    public init(findOrdersByUserId: [FindOrdersByUserId?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "Query", "findOrdersByUserId": findOrdersByUserId.flatMap { (value: [FindOrdersByUserId?]) -> [ResultMap?] in value.map { (value: FindOrdersByUserId?) -> ResultMap? in value.flatMap { (value: FindOrdersByUserId) -> ResultMap in value.resultMap } } }])
     }
 
-    public var findAllOrderByUserId: [FindAllOrderByUserId?]? {
+    public var findOrdersByUserId: [FindOrdersByUserId?]? {
       get {
-        return (resultMap["findAllOrderByUserId"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [FindAllOrderByUserId?] in value.map { (value: ResultMap?) -> FindAllOrderByUserId? in value.flatMap { (value: ResultMap) -> FindAllOrderByUserId in FindAllOrderByUserId(unsafeResultMap: value) } } }
+        return (resultMap["findOrdersByUserId"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [FindOrdersByUserId?] in value.map { (value: ResultMap?) -> FindOrdersByUserId? in value.flatMap { (value: ResultMap) -> FindOrdersByUserId in FindOrdersByUserId(unsafeResultMap: value) } } }
       }
       set {
-        resultMap.updateValue(newValue.flatMap { (value: [FindAllOrderByUserId?]) -> [ResultMap?] in value.map { (value: FindAllOrderByUserId?) -> ResultMap? in value.flatMap { (value: FindAllOrderByUserId) -> ResultMap in value.resultMap } } }, forKey: "findAllOrderByUserId")
+        resultMap.updateValue(newValue.flatMap { (value: [FindOrdersByUserId?]) -> [ResultMap?] in value.map { (value: FindOrdersByUserId?) -> ResultMap? in value.flatMap { (value: FindOrdersByUserId) -> ResultMap in value.resultMap } } }, forKey: "findOrdersByUserId")
       }
     }
 
-    public struct FindAllOrderByUserId: GraphQLSelectionSet {
+    public struct FindOrdersByUserId: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Order"]
 
       public static var selections: [GraphQLSelection] {

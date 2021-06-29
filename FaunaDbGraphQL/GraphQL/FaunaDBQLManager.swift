@@ -32,12 +32,12 @@ open class FaunaDBQLManager {
 
     // Fetch Events filtered by slug
     
-    open func fetchAllOrdersByUserId(userId: String, success: @escaping([FindAllOrderQuery.Data.FindAllOrderByUserId?]?) -> Void, failure: @escaping(Error) -> Void) {
+    open func fetchAllOrdersByUserId(userId: String, success: @escaping([FindAllOrderQuery.Data.FindOrdersByUserId?]?) -> Void, failure: @escaping(Error) -> Void) {
 
         self.apollo.fetch(query: FindAllOrderQuery(userId: userId), cachePolicy: .fetchIgnoringCacheData) { (result) in
             switch result {
             case .success(let graphResult):
-                let orders = graphResult.data?.findAllOrderByUserId
+                let orders = graphResult.data?.findOrdersByUserId
                 success(orders)
             case .failure(let error):
                 failure(error)

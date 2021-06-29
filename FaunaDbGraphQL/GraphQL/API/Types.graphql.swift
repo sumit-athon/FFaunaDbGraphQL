@@ -29,8 +29,12 @@ public struct UserInput: GraphQLMapConvertible {
   ///   - clPayment
   ///   - userType
   ///   - username
-  public init(auth0ClientId: Swift.Optional<String?> = nil, auth0CreatedAt: Swift.Optional<String?> = nil, auth0Email: Swift.Optional<String?> = nil, auth0EmailVerified: Swift.Optional<String?> = nil, auth0GlobalClientId: Swift.Optional<String?> = nil, auth0Id: Swift.Optional<String?> = nil, auth0Identities0Connection: Swift.Optional<String?> = nil, auth0Identities0Issocial: Swift.Optional<String?> = nil, auth0Identities0Provider: Swift.Optional<String?> = nil, auth0Identities0UserId: Swift.Optional<String?> = nil, auth0Name: Swift.Optional<String?> = nil, auth0Nickname: Swift.Optional<String?> = nil, auth0Picture: Swift.Optional<String?> = nil, auth0UpdatedAt: Swift.Optional<String?> = nil, auth0UserId: Swift.Optional<String?> = nil, clBilling: Swift.Optional<AddressInput?> = nil, clShipping: Swift.Optional<AddressInput?> = nil, clPayment: Swift.Optional<PaymentSourceDetailInput?> = nil, userType: Swift.Optional<UserType?> = nil, username: Swift.Optional<String?> = nil) {
-    graphQLMap = ["auth0_client_id": auth0ClientId, "auth0_created_at": auth0CreatedAt, "auth0_email": auth0Email, "auth0_email_verified": auth0EmailVerified, "auth0_global_client_id": auth0GlobalClientId, "auth0_id": auth0Id, "auth0_identities0_connection": auth0Identities0Connection, "auth0_identities0_issocial": auth0Identities0Issocial, "auth0_identities0_provider": auth0Identities0Provider, "auth0_identities0_user_id": auth0Identities0UserId, "auth0_name": auth0Name, "auth0_nickname": auth0Nickname, "auth0_picture": auth0Picture, "auth0_updated_at": auth0UpdatedAt, "auth0_user_id": auth0UserId, "cl_billing": clBilling, "cl_shipping": clShipping, "cl_payment": clPayment, "user_type": userType, "username": username]
+  ///   - isUserDefinedUsername
+  ///   - description
+  ///   - following
+  ///   - follower
+  public init(auth0ClientId: Swift.Optional<String?> = nil, auth0CreatedAt: Swift.Optional<String?> = nil, auth0Email: Swift.Optional<String?> = nil, auth0EmailVerified: Swift.Optional<String?> = nil, auth0GlobalClientId: Swift.Optional<String?> = nil, auth0Id: Swift.Optional<String?> = nil, auth0Identities0Connection: Swift.Optional<String?> = nil, auth0Identities0Issocial: Swift.Optional<String?> = nil, auth0Identities0Provider: Swift.Optional<String?> = nil, auth0Identities0UserId: Swift.Optional<String?> = nil, auth0Name: Swift.Optional<String?> = nil, auth0Nickname: Swift.Optional<String?> = nil, auth0Picture: Swift.Optional<String?> = nil, auth0UpdatedAt: Swift.Optional<String?> = nil, auth0UserId: Swift.Optional<String?> = nil, clBilling: Swift.Optional<AddressInput?> = nil, clShipping: Swift.Optional<AddressInput?> = nil, clPayment: Swift.Optional<PaymentSourceDetailInput?> = nil, userType: Swift.Optional<UserType?> = nil, username: Swift.Optional<String?> = nil, isUserDefinedUsername: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, following: Swift.Optional<FollowingInput?> = nil, follower: Swift.Optional<FollowerInput?> = nil) {
+    graphQLMap = ["auth0_client_id": auth0ClientId, "auth0_created_at": auth0CreatedAt, "auth0_email": auth0Email, "auth0_email_verified": auth0EmailVerified, "auth0_global_client_id": auth0GlobalClientId, "auth0_id": auth0Id, "auth0_identities0_connection": auth0Identities0Connection, "auth0_identities0_issocial": auth0Identities0Issocial, "auth0_identities0_provider": auth0Identities0Provider, "auth0_identities0_user_id": auth0Identities0UserId, "auth0_name": auth0Name, "auth0_nickname": auth0Nickname, "auth0_picture": auth0Picture, "auth0_updated_at": auth0UpdatedAt, "auth0_user_id": auth0UserId, "cl_billing": clBilling, "cl_shipping": clShipping, "cl_payment": clPayment, "user_type": userType, "username": username, "is_user_defined_username": isUserDefinedUsername, "description": description, "following": following, "follower": follower]
   }
 
   public var auth0ClientId: Swift.Optional<String?> {
@@ -210,6 +214,42 @@ public struct UserInput: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "username")
+    }
+  }
+
+  public var isUserDefinedUsername: Swift.Optional<String?> {
+    get {
+      return graphQLMap["is_user_defined_username"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "is_user_defined_username")
+    }
+  }
+
+  public var description: Swift.Optional<String?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var following: Swift.Optional<FollowingInput?> {
+    get {
+      return graphQLMap["following"] as? Swift.Optional<FollowingInput?> ?? Swift.Optional<FollowingInput?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "following")
+    }
+  }
+
+  public var follower: Swift.Optional<FollowerInput?> {
+    get {
+      return graphQLMap["follower"] as? Swift.Optional<FollowerInput?> ?? Swift.Optional<FollowerInput?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "follower")
     }
   }
 }
@@ -437,12 +477,14 @@ public struct PaymentMethodDetailInput: GraphQLMapConvertible {
 public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   case creator
+  case audience
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
       case "CREATOR": self = .creator
+      case "AUDIENCE": self = .audience
       default: self = .__unknown(rawValue)
     }
   }
@@ -450,6 +492,7 @@ public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apoll
   public var rawValue: RawValue {
     switch self {
       case .creator: return "CREATOR"
+      case .audience: return "AUDIENCE"
       case .__unknown(let value): return value
     }
   }
@@ -457,6 +500,7 @@ public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apoll
   public static func == (lhs: UserType, rhs: UserType) -> Bool {
     switch (lhs, rhs) {
       case (.creator, .creator): return true
+      case (.audience, .audience): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -465,6 +509,47 @@ public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apoll
   public static var allCases: [UserType] {
     return [
       .creator,
+      .audience,
     ]
+  }
+}
+
+/// 'Following' input values
+public struct FollowingInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - users
+  public init(users: Swift.Optional<[GraphQLID?]?> = nil) {
+    graphQLMap = ["users": users]
+  }
+
+  public var users: Swift.Optional<[GraphQLID?]?> {
+    get {
+      return graphQLMap["users"] as? Swift.Optional<[GraphQLID?]?> ?? Swift.Optional<[GraphQLID?]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "users")
+    }
+  }
+}
+
+/// 'Follower' input values
+public struct FollowerInput: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - users
+  public init(users: Swift.Optional<[GraphQLID?]?> = nil) {
+    graphQLMap = ["users": users]
+  }
+
+  public var users: Swift.Optional<[GraphQLID?]?> {
+    get {
+      return graphQLMap["users"] as? Swift.Optional<[GraphQLID?]?> ?? Swift.Optional<[GraphQLID?]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "users")
+    }
   }
 }

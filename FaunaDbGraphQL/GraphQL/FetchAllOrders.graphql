@@ -1,5 +1,5 @@
 query findAllOrder($userId: String!) {
-  findAllOrderByUserId(userId: $userId) {
+  findOrdersByUserId(userId: $userId) {
     cl_order_id
     cl_created_at,
     cl_order_image_url,
