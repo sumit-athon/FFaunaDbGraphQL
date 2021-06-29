@@ -13,8 +13,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        FaunaDBQLManager.shared.graphQLendPoint = "https://graphql.fauna.com/graphql"
-        FaunaDBQLManager.shared.graphQLAuthKey = "fnAELwAe3lACBUO9VOHrSrpf1HZiP4U_mxq0ZFrM"
+        FaunaDBQLManager.shared.graphQLendPoint = ""
+        FaunaDBQLManager.shared.graphQLAuthKey = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
