@@ -11,6 +11,7 @@ query fetchUserByFaunaID($id: ID!) {
     auth0_identities0_issocial,
     auth0_identities0_provider,
     username,
+    user_type,
     cl_payment {
       cl_type,
       cl_payment_method_details {

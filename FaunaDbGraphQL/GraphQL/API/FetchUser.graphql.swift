@@ -22,6 +22,7 @@ public final class FetchUserByFaunaIdQuery: GraphQLQuery {
         auth0_identities0_issocial
         auth0_identities0_provider
         username
+        user_type
         cl_payment {
           __typename
           cl_type
@@ -105,6 +106,7 @@ public final class FetchUserByFaunaIdQuery: GraphQLQuery {
           GraphQLField("auth0_identities0_issocial", type: .scalar(String.self)),
           GraphQLField("auth0_identities0_provider", type: .scalar(String.self)),
           GraphQLField("username", type: .scalar(String.self)),
+          GraphQLField("user_type", type: .scalar(UserType.self)),
           GraphQLField("cl_payment", type: .object(ClPayment.selections)),
           GraphQLField("cl_shipping", type: .object(ClShipping.selections)),
         ]
@@ -116,8 +118,8 @@ public final class FetchUserByFaunaIdQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(_id: GraphQLID, auth0Id: String? = nil, auth0Name: String? = nil, auth0Email: String? = nil, auth0Nickname: String? = nil, auth0Picture: String? = nil, auth0UserId: String? = nil, auth0Identities0UserId: String? = nil, auth0Identities0Issocial: String? = nil, auth0Identities0Provider: String? = nil, username: String? = nil, clPayment: ClPayment? = nil, clShipping: ClShipping? = nil) {
-        self.init(unsafeResultMap: ["__typename": "User", "_id": _id, "auth0_id": auth0Id, "auth0_name": auth0Name, "auth0_email": auth0Email, "auth0_nickname": auth0Nickname, "auth0_picture": auth0Picture, "auth0_user_id": auth0UserId, "auth0_identities0_user_id": auth0Identities0UserId, "auth0_identities0_issocial": auth0Identities0Issocial, "auth0_identities0_provider": auth0Identities0Provider, "username": username, "cl_payment": clPayment.flatMap { (value: ClPayment) -> ResultMap in value.resultMap }, "cl_shipping": clShipping.flatMap { (value: ClShipping) -> ResultMap in value.resultMap }])
+      public init(_id: GraphQLID, auth0Id: String? = nil, auth0Name: String? = nil, auth0Email: String? = nil, auth0Nickname: String? = nil, auth0Picture: String? = nil, auth0UserId: String? = nil, auth0Identities0UserId: String? = nil, auth0Identities0Issocial: String? = nil, auth0Identities0Provider: String? = nil, username: String? = nil, userType: UserType? = nil, clPayment: ClPayment? = nil, clShipping: ClShipping? = nil) {
+        self.init(unsafeResultMap: ["__typename": "User", "_id": _id, "auth0_id": auth0Id, "auth0_name": auth0Name, "auth0_email": auth0Email, "auth0_nickname": auth0Nickname, "auth0_picture": auth0Picture, "auth0_user_id": auth0UserId, "auth0_identities0_user_id": auth0Identities0UserId, "auth0_identities0_issocial": auth0Identities0Issocial, "auth0_identities0_provider": auth0Identities0Provider, "username": username, "user_type": userType, "cl_payment": clPayment.flatMap { (value: ClPayment) -> ResultMap in value.resultMap }, "cl_shipping": clShipping.flatMap { (value: ClShipping) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -226,6 +228,15 @@ public final class FetchUserByFaunaIdQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "username")
+        }
+      }
+
+      public var userType: UserType? {
+        get {
+          return resultMap["user_type"] as? UserType
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "user_type")
         }
       }
 

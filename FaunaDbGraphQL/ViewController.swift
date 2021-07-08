@@ -13,13 +13,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        FaunaDBQLManager.shared.graphQLendPoint = ""
-        FaunaDBQLManager.shared.graphQLAuthKey = ""
+        FaunaDBQLManager.shared.graphQLendPoint = "https://graphql.fauna.com/graphql"
+        FaunaDBQLManager.shared.graphQLAuthKey = "fnAELwAe3lACBUO9VOHrSrpf1HZiP4U_mxq0ZFrM"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkUsernameExist()
+//        checkUsernameExist()
+        fetchAllOrders()
     }
     
     private func checkUsernameExist() {
@@ -39,7 +40,7 @@ class ViewController: UIViewController {
     }
     
     private func fetchAllOrders() {
-        FaunaDBQLManager.shared.fetchAllOrdersByUserId(userId: "") { (orders) in
+        FaunaDBQLManager.shared.fetchAllOrdersByUserId(userId: "301016749594116613") { (orders) in
             print("Orders Count: \(orders?.count)")
             let images = orders?.map({$0?.clOrderImageUrl})
             print(images)

@@ -4,6 +4,46 @@
 import Apollo
 import Foundation
 
+public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  case creator
+  case audience
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "CREATOR": self = .creator
+      case "AUDIENCE": self = .audience
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .creator: return "CREATOR"
+      case .audience: return "AUDIENCE"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: UserType, rhs: UserType) -> Bool {
+    switch (lhs, rhs) {
+      case (.creator, .creator): return true
+      case (.audience, .audience): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [UserType] {
+    return [
+      .creator,
+      .audience,
+    ]
+  }
+}
+
 /// 'User' input values
 public struct UserInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -471,46 +511,6 @@ public struct PaymentMethodDetailInput: GraphQLMapConvertible {
     set {
       graphQLMap.updateValue(newValue, forKey: "cl_exp_month")
     }
-  }
-}
-
-public enum UserType: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = String
-  case creator
-  case audience
-  /// Auto generated constant for unknown enum values
-  case __unknown(RawValue)
-
-  public init?(rawValue: RawValue) {
-    switch rawValue {
-      case "CREATOR": self = .creator
-      case "AUDIENCE": self = .audience
-      default: self = .__unknown(rawValue)
-    }
-  }
-
-  public var rawValue: RawValue {
-    switch self {
-      case .creator: return "CREATOR"
-      case .audience: return "AUDIENCE"
-      case .__unknown(let value): return value
-    }
-  }
-
-  public static func == (lhs: UserType, rhs: UserType) -> Bool {
-    switch (lhs, rhs) {
-      case (.creator, .creator): return true
-      case (.audience, .audience): return true
-      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
-      default: return false
-    }
-  }
-
-  public static var allCases: [UserType] {
-    return [
-      .creator,
-      .audience,
-    ]
   }
 }
 
